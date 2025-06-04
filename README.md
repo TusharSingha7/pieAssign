@@ -1,6 +1,6 @@
 # pieAssign
 
---- clone the Repo
+## clone the Repo
 
 # Initialize with Docker
  - execute the following command in order 
@@ -10,13 +10,13 @@
     -- your url shoudl look something like this in this case "postgresql://useranme:user_password@host.docker.internal:3000/database_name"
 - query the api using browser or postman at http://localhost:3000/videos , url is same for both post and get endpoint 
 - #inputs for post endpoint (/videos)
---- userId
---- videoUrl
---- thumbnailUrl
---- label
---- title
---- description 
----> This post endpoints adds the video details along with metadata in database
+    - userId
+    - videoUrl
+    - thumbnailUrl
+    - label
+    - title
+    - description 
+  ## This post endpoint adds the video details along with metadata in database
 
 # Initialize without docker 
 
@@ -30,8 +30,8 @@
 
 # Data Seeding
 
----> if not using docker
-    --- Run npx prisma db seed
+- if not using docker
+    - Run npx prisma db seed
 
 ---> if using docker
     --- Initialize the container (run the container)
