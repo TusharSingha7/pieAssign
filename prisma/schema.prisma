@@ -1,0 +1,90 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+
+  id        String @id @default(cuid())
+  username  String @unique
+  avatarUrl String 
+  videos    Video[]
+  likes     Likes[] @relation("UserLikes")
+  views     Views[] @relation("UserViews")
+  comments  Comment[]
+
+}
+
+model Video {
+  id          String @id @default(cuid())
+  title       String 
+  description String 
+  videoUrl    String
+  author      User @relation(fields: [userId] , references: [id])
+  userId      String
+  metaItem    MetaItem?
+  createdAt   DateTime @default(now())
+  interaction Interaction?
+}
+
+model MetaItem {
+  id            String @id @default(cuid())
+  video         Video @relation(fields: [videoId] , references: [id])
+  videoId       String @unique
+  thumbnailUrl  String 
+  label         String 
+  updatedAt     DateTime @updatedAt
+}
+
+model Interaction {
+  id                String @id @default(cuid())
+  likesCount        Int
+  commentsCount     Int
+  viewsCount        Int
+  video             Video @relation(fields: [videoId] , references: [id])
+  videoId           String @unique
+  likes             Likes?
+  views             Views?
+  comments          CommentSection?
+}
+
+model Likes {
+  id              String @id @default(cuid())
+  users           User[] @relation("UserLikes")
+  interaction     Interaction @relation(fields: [interactionId] , references: [id])
+  interactionId   String @unique
+}
+
+model Views {
+  id              String @id @default(cuid())
+  users           User[] @relation("UserViews")
+  interaction     Interaction @relation(fields: [interactionId] , references: [id])
+  interactionId   String @unique
+}
+model CommentSection {
+  id              String @id @default(cuid())
+  comments        Comment[]
+  interaction     Interaction @relation(fields: [interactionId] , references: [id])
+  interactionId   String @unique
+}
+
+model Comment {
+  id                  String @id @default(cuid())
+  context             String
+  author              User @relation(fields: [userId] ,references: [id])
+  userId              String
+  commentSection      CommentSection @relation(fields: [commentSectionId] , references: [id])
+  commentSectionId    String 
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+}
