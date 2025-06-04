@@ -9,7 +9,7 @@ RUN npm install
 
 COPY . .
 
-RUN npx prisma generate
+RUN npx prisma db push
 RUN npx tsc -b
 
 EXPOSE 3000
