@@ -17,6 +17,28 @@ async function main() {
                             thumbnailUrl : 'fake_url',
                             label : 'fake_label'
                         }
+                    },
+                    interaction : {
+                      create : {
+                        likesCount : 0,
+                        viewsCount : 0,
+                        commentsCount : 0,
+                        likes : {
+                          create : {
+
+                          }
+                        },
+                        views : {
+                          create : {
+
+                          }
+                        },
+                        commentSection : {
+                          create : {
+
+                          }
+                        }
+                      }
                     }
                 },
           },
@@ -38,6 +60,28 @@ async function main() {
                     thumbnailUrl : 'fake_url',
                     label : 'fake_label'
                 }
+            },
+            interaction : {
+              create : {
+                likesCount : 0,
+                viewsCount : 0,
+                commentsCount : 0,
+                likes : {
+                  create : {
+
+                  }
+                },
+                views : {
+                  create : {
+
+                  }
+                },
+                commentSection : {
+                  create : {
+
+                  }
+                }
+              }
             }
         },
     update: {}

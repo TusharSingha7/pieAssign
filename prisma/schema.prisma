@@ -56,7 +56,7 @@ model Interaction {
   videoId           String @unique
   likes             Likes?
   views             Views?
-  comments          CommentSection?
+  commentSection    CommentSection?
 }
 
 model Likes {

@@ -41,6 +41,28 @@ app.post('/video', async (req: Request, res: Response) : Promise<any> => {
                     label: parsedMetaItem.data.label,
                     thumbnailUrl: parsedMetaItem.data.thumbnailUrl || ""
                 }
+            },
+            interaction : {
+                create : {
+                likesCount : 0,
+                viewsCount : 0,
+                commentsCount : 0,
+                likes : {
+                    create : {
+
+                    }
+                },
+                views : {
+                    create : {
+
+                    }
+                },
+                commentSection : {
+                    create : {
+
+                    }
+                }
+                }
             }
         },
         select: {

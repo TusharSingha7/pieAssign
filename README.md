@@ -50,3 +50,7 @@
     - post method used to add user in database with following data inputs (all string)
         - username (has to be unique)
         - avatarUrl
+
+{
+    "id": "cmbi290uy0000zjao4n4jcs2s"
+}
