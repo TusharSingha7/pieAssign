@@ -82,7 +82,8 @@ app.get('/videos',async (req : Request,res : Response) : Promise<any> =>{
         const List = await client.video.findMany({
         include : {
             author : true,
-            metaItem : true
+            metaItem : true,
+            interaction : true
         },
         take:10,
         orderBy : {createdAt : 'asc'}
