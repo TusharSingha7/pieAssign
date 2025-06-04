@@ -8,21 +8,12 @@
  - docker run --name container_name -e DATABASE_URL="your_database_url" -d image_name
  - if running database in local machine as container replace localhost with host.docker.internal
     - your url shoudl look something like this in this case "postgresql://useranme:user_password@host.docker.internal:3000/database_name"
-- query the api using browser or postman at http://localhost:3000/videos , url is same for both post and get endpoint 
-- #inputs for post endpoint (/videos)
-    - userId
-    - videoUrl
-    - thumbnailUrl
-    - label
-    - title
-    - description 
-  ## This post endpoint adds the video details along with metadata in database
 
 # Initialize without docker 
 
 - Run npm install
 - create .env file
-- add DATABASE_URL="your_database_url" field in .env 
+- add DATABASE_URL="your_database_url" field in .env
 - Run npx prisma db push 
 - Run npx tsc -b
 - Run node dist/index.js
@@ -40,3 +31,22 @@
     - Run npx prisma db seed
     - exit 
     - the database is seeded with some data 
+
+# API ENPOINTS
+
+- /videos 
+    - get method retireves all the videos
+- /video
+    - post method used to add video in database with following data inputs (all are string)
+        - userId
+        - videoUrl
+        - thumbnailUrl
+        - label
+        - title
+        - description 
+- /users
+    - get method retrieves all the users
+- /user
+    - post method used to add user in database with following data inputs (all string)
+        - username (has to be unique)
+        - avatarUrl

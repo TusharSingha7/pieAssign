@@ -12,7 +12,7 @@ app.use(express.json())
 
 app.use(authMiddleware);
 
-app.post('/videos', async (req: Request, res: Response) : Promise<any> => {
+app.post('/video', async (req: Request, res: Response) : Promise<any> => {
     const client = new PrismaClient();
     const data = req.body;
 
@@ -117,6 +117,6 @@ app.get('/users',async (req : Request,res : Response)=>{
 
 const PORT = 3000;
 
-app.listen(PORT , ()=>{
-    console.log("server listening on port : " + PORT);
+app.listen(PORT , (error)=>{
+    console.log(error);
 })
