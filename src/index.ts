@@ -3,7 +3,7 @@ import express, { Request, Response } from 'express'
 import cors from 'cors'
 import { PrismaClient } from '@prisma/client';
 import { authMiddleware } from './middleware';
-import { videoSchema , metaItemSchema } from './types';
+import { videoSchema , metaItemSchema, userSchema } from './types';
 
 const app = express();
 
@@ -32,14 +32,14 @@ app.post('/videos', async (req: Request, res: Response) : Promise<any> => {
 
     const video_created = await client.video.create({
         data: {
-            title: data.title,
-            description: data.description,
-            userId: data.userId,
-            videoUrl: data.videoUrl,
+            title: parsedVideo.data.title,
+            description: parsedVideo.data.description,
+            userId: parsedVideo.data.userId,
+            videoUrl: parsedVideo.data.videoUrl,
             metaItem: {
                 create: {
-                    label: data.label,
-                    thumbnailUrl: data.thumbnailUrl 
+                    label: parsedMetaItem.data.label,
+                    thumbnailUrl: parsedMetaItem.data.thumbnailUrl || ""
                 }
             }
         },
@@ -73,6 +73,47 @@ app.get('/videos',async (req : Request,res : Response) : Promise<any> =>{
     }
 
 });
+
+app.post('/user',async (req : Request,res : Response)=>{
+
+    const data = req.body;
+    const partialUserSchema = userSchema.pick({
+        username : true,
+        avatarUrl : true
+    });
+
+    const parsedUser = partialUserSchema.safeParse(data);
+
+    if(!parsedUser.success) res.status(400).json({error : parsedUser.error.errors})
+
+    const client = new PrismaClient();
+
+    const userId = await client.user.create({
+        data : {
+            username : parsedUser.data!.username,
+            avatarUrl : parsedUser.data!.avatarUrl
+        },
+        select : {
+            id : true
+        }
+    });
+
+    res.status(200).json(userId)
+
+});
+
+app.get('/users',async (req : Request,res : Response)=>{
+
+    const client = new PrismaClient();
+
+    const users = await client.user.findMany({
+        take: 10,
+        orderBy : { createdAt : 'asc' }
+    })
+
+    res.status(200).json(users)
+
+})
 
 const PORT = 3000;
 

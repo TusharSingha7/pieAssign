@@ -22,6 +22,7 @@ model User {
   likes     Likes[] @relation("UserLikes")
   views     Views[] @relation("UserViews")
   comments  Comment[]
+  createdAt DateTime @default(now())
 
 }
 
