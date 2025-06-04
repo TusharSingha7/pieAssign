@@ -23,7 +23,7 @@
 --- Run npm install
 --- create .env file
 --- add DATABASE_URL="your_database_url" field in .env 
---- Run npx prisma generate 
+--- Run npx prisma db push 
 --- Run npx tsc -b
 --- Run node dist/index.js
 --- query the api using browser or postman at http://localhost:3000/videos , url is same for both post and get endpoint
@@ -38,3 +38,5 @@
     --- Run docker exec -it <container-id> /bin/sh
     --- You should see a shell started with prefix /app #
     --- Run npx prisma db seed
+    --- exit 
+    --- the database is seeded with some data 
