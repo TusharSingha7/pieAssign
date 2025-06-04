@@ -61,7 +61,9 @@ app.get('/videos',async (req : Request,res : Response) : Promise<any> =>{
         include : {
             author : true,
             metaItem : true
-        }
+        },
+        take:10,
+        orderBy : {createdAt : 'asc'}
         });
         res.status(200).json(List);
     }
