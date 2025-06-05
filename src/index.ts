@@ -22,9 +22,7 @@ app.post('/video', async (req: Request, res: Response) : Promise<any> => {
         return res.status(400).json({ error: parsedVideo.error.errors });
     }
 
-    const partialMetaItemSchema = metaItemSchema.pick({label:true , thumbnailUrl : true});
-
-    const parsedMetaItem = partialMetaItemSchema.safeParse(data);
+    const parsedMetaItem = metaItemSchema.safeParse(data);
 
     if (!parsedMetaItem.success) {
         return res.status(400).json({ error: parsedMetaItem.error.errors });
@@ -100,12 +98,8 @@ app.get('/videos',async (req : Request,res : Response) : Promise<any> =>{
 app.post('/user',async (req : Request,res : Response)=>{
 
     const data = req.body;
-    const partialUserSchema = userSchema.pick({
-        username : true,
-        avatarUrl : true
-    });
 
-    const parsedUser = partialUserSchema.safeParse(data);
+    const parsedUser = userSchema.safeParse(data);
 
     if(!parsedUser.success) res.status(400).json({error : parsedUser.error.errors})
 
